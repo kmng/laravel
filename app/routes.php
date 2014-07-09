@@ -11,7 +11,19 @@
 |
 */
 
-Route::get('/', function()
+/*Route::get('/', function()
 {
 	return View::make('hello');
+});
+*/
+/*
+add empty roule
+*/
+
+Route::get('/', function(){
+  return "All cats";
+});
+
+Route::get('cats/{id}', function($id){
+  return "Cat #$id";
 });
