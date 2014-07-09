@@ -26,4 +26,4 @@ Route::get('/', function(){
 
 Route::get('cats/{id}', function($id){
   return "Cat #$id";
-});
+})->where('id', '[0-9]+');
