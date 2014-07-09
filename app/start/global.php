@@ -21,6 +21,12 @@ ClassLoader::addDirectories(array(
 ));
 
 /*
+add missing handler
+*/
+App::missing(function($exception){
+  return Response::make("Page not found", 404);
+});
+/*
 |--------------------------------------------------------------------------
 | Application Error Logger
 |--------------------------------------------------------------------------
