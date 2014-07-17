@@ -44,6 +44,20 @@ Route::get('cats/{cat}', function(Cat $cat) {
     ->with('cat', $cat);
 });
 
+
+Route::get('cats/create', function() {
+  $cat = new Cat;
+  return View::make('cats.edit')
+    ->with('cat', $cat)
+    ->with('method', 'post');
+});
+
+Route::post('cats', function(){
+  $cat = Cat::create(Input::all());
+  return Redirect::to('cats/' . $cat->id)
+    ->with('message', 'Successfully created page!');
+});
+
 Route::get('about', function(){
   return View::make('about')->with('number_of_cats', 9000);
 });
