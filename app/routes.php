@@ -20,6 +20,8 @@
 add empty roule
 */
 
+Route::model('cat', 'Cat');
+
 Route::get('/', function(){
   return "All cats";
 });
@@ -37,8 +39,7 @@ Route::get('cats/breeds/{name}', function($name){
     ->with('cats', $breed->cats);
 });
 
-Route::get('cats/{id}', function($id) {
-  $cat = Cat::find($id);
+Route::get('cats/{cat}', function(Cat $cat) {
   return View::make('cats.single')
     ->with('cat', $cat);
 });
