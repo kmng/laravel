@@ -52,6 +52,18 @@ Route::get('cats/create', function() {
     ->with('method', 'post');
 });
 
+Route::get('cats/{cat}/edit', function(Cat $cat) {
+  return View::make('cats.edit')
+    ->with('cat', $cat)
+    ->with('method', 'put');
+});
+
+Route::get('cats/{cat}/delete', function(Cat $cat) {
+  return View::make('cats.edit')
+    ->with('cat', $cat)
+    ->with('method', 'delete');
+});
+
 View::composer('cats.edit', function($view)
 {
   $breeds = Breed::all();
@@ -68,6 +80,18 @@ Route::post('cats', function(){
   $cat = Cat::create(Input::all());
   return Redirect::to('cats/' . $cat->id)
     ->with('message', 'Successfully created page!');
+});
+
+Route::put('cats/{cat}', function(Cat $cat) {
+  $cat->update(Input::all());
+  return Redirect::to('cats/' . $cat->id)
+    ->with('message', 'Successfully updated page!');
+});
+
+Route::delete('cats/{cat}', function(Cat $cat) {
+  $cat->delete();
+  return Redirect::to('cats')
+    ->with('message', 'Successfully deleted page!');
 });
 
 Route::get('about', function(){
