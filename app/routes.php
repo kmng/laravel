@@ -52,6 +52,18 @@ Route::get('cats/create', function() {
     ->with('method', 'post');
 });
 
+View::composer('cats.edit', function($view)
+{
+  $breeds = Breed::all();
+  if(count($breeds) > 0){
+    $breed_options = array_combine($breeds->lists('id'), 
+                                 $breeds->lists('name'));
+  } else {
+    $breed_options = array(null, 'Unspecified');
+  }
+  $view->with('breed_options', $breed_options);
+});
+
 Route::post('cats', function(){
   $cat = Cat::create(Input::all());
   return Redirect::to('cats/' . $cat->id)
